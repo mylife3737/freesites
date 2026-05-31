@@ -1,0 +1,309 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Website Questionnaire</title>
+<link href="https://fonts.googleapis.com/css2?family=Archivo+Black&family=Inter:wght@400;700;900&display=swap" rel="stylesheet">
+<style>
+  * { box-sizing: border-box; margin: 0; padding: 0; }
+  body { font-family: 'Inter', sans-serif; background: #0a0a0a; color: #fff; }
+
+  nav {
+    display: flex; align-items: center; justify-content: center;
+    flex-direction: column; text-align: center;
+    padding: 1.2rem 2rem; border-bottom: 2px solid #222;
+    background: #0a0a0a; position: sticky; top: 0; z-index: 100; gap: 0.5rem;
+  }
+  .nav-title {
+    font-family: 'Archivo Black', sans-serif; font-size: 0.85rem; text-transform: uppercase; letter-spacing: 0.04em;
+    background: linear-gradient(90deg, #f9a826, #e040fb, #00e5ff);
+    -webkit-background-clip: text; -webkit-text-fill-color: transparent; background-clip: text;
+  }
+  .nav-sub { font-size: 0.78rem; color: #aaa; letter-spacing: 0.06em; }
+
+  .divider-top { height: 4px; background: linear-gradient(90deg, #f9a826, #e040fb, #00e5ff, #00e676); }
+
+  .hero { padding: 3rem 2rem 2rem; text-align: center; }
+
+  .badge {
+    display: inline-block; background: #e040fb; color: #fff;
+    font-size: 0.68rem; font-weight: 900; text-transform: uppercase;
+    letter-spacing: 0.15em; padding: 0.5rem 1.2rem; border-radius: 12px;
+    margin-bottom: 1.5rem; line-height: 1.8; text-align: center;
+  }
+
+  h1 {
+    font-family: 'Archivo Black', sans-serif;
+    font-size: clamp(1.8rem, 5vw, 3.5rem);
+    line-height: 1.05; margin: 0 0 1rem; letter-spacing: -1.5px; color: #fff;
+  }
+
+  .grad-y { background: linear-gradient(90deg, #f9a826, #ff5252); -webkit-background-clip: text; -webkit-text-fill-color: transparent; background-clip: text; }
+  .grad-p { background: linear-gradient(90deg, #e040fb, #00e5ff); -webkit-background-clip: text; -webkit-text-fill-color: transparent; background-clip: text; }
+
+  .hero-sub { font-size: 1rem; color: #aaa; max-width: 520px; margin: 0 auto; line-height: 1.7; }
+
+  .divider { height: 4px; background: linear-gradient(90deg, #f9a826, #e040fb, #00e5ff, #00e676); margin: 2.5rem 0 0; }
+
+  .form-section { max-width: 680px; margin: 0 auto; padding: 3rem 2rem 5rem; }
+
+  .step {
+    background: #111; border: 1.5px solid #222; border-radius: 14px;
+    padding: 2rem; margin-bottom: 1.5rem;
+  }
+
+  .step-num {
+    font-size: 0.65rem; font-weight: 900; text-transform: uppercase;
+    letter-spacing: 0.2em; margin-bottom: 0.5rem;
+  }
+
+  .step-q {
+    font-family: 'Archivo Black', sans-serif; font-size: 1.1rem;
+    color: #fff; margin-bottom: 1.25rem; line-height: 1.3;
+  }
+
+  label { display: block; font-size: 0.82rem; color: #999; font-weight: 700; text-transform: uppercase; letter-spacing: 0.08em; margin-bottom: 0.4rem; }
+
+  input[type="text"], input[type="email"], input[type="tel"], textarea, select {
+    width: 100%; background: #1a1a1a; border: 2px solid #333; color: #fff;
+    font-size: 0.95rem; padding: 0.85rem 1rem; border-radius: 6px;
+    outline: none; font-family: 'Inter', sans-serif; margin-bottom: 1rem;
+  }
+  input:focus, textarea:focus, select:focus { border-color: #e040fb; }
+  input::placeholder, textarea::placeholder { color: #555; }
+  textarea { resize: vertical; min-height: 100px; }
+  select option { background: #1a1a1a; }
+
+  .field-row { display: grid; grid-template-columns: 1fr 1fr; gap: 1rem; }
+  @media (max-width: 520px) { .field-row { grid-template-columns: 1fr; } }
+
+  .radio-group { display: flex; flex-direction: column; gap: 0.6rem; }
+  .radio-opt {
+    display: flex; align-items: center; gap: 0.75rem;
+    background: #1a1a1a; border: 2px solid #2a2a2a; border-radius: 8px;
+    padding: 0.75rem 1rem; cursor: pointer; transition: border-color 0.2s;
+    font-size: 0.9rem; color: #ddd;
+  }
+  .radio-opt:hover { border-color: #e040fb; }
+  .radio-opt input[type="radio"] { accent-color: #e040fb; width: 16px; height: 16px; margin: 0; flex-shrink: 0; }
+  .radio-opt.selected { border-color: #e040fb; background: #1a001a; color: #fff; }
+
+  .submit-wrap { text-align: center; margin-top: 2.5rem; }
+
+  .btn-submit {
+    background-color: #f9a826 !important;
+    color: #000 !important; font-weight: 900; font-size: 1rem;
+    padding: 1rem 2.5rem; border: 3px solid #f9a826; border-radius: 6px;
+    text-transform: uppercase; letter-spacing: 0.06em; cursor: pointer;
+    font-family: 'Archivo Black', sans-serif;
+    display: inline-block !important; opacity: 1 !important;
+  }
+
+  .success-box {
+    display: none; background: #001a0a; border: 2px solid #00e676;
+    border-radius: 12px; padding: 2.5rem; text-align: center; margin-top: 2rem;
+  }
+  .success-box h3 { font-family: 'Archivo Black', sans-serif; font-size: 1.5rem; color: #00e676; margin-bottom: 0.75rem; }
+  .success-box p { color: #aaa; font-size: 0.95rem; line-height: 1.6; }
+
+  footer { background: #000; border-top: 1px solid #1a1a1a; padding: 2rem; text-align: center; font-size: 0.8rem; color: #666; }
+</style>
+</head>
+<body>
+
+<div class="divider-top"></div>
+<nav>
+  <div class="nav-title">Free Website Offer for Small Businesses &amp; Freelancers</div>
+  <div class="nav-sub">Handymen · Lawn Services · Pool Services · House Cleaners · Small Business Owners</div>
+</nav>
+
+<section class="hero">
+  <div class="badge">Step 1 of 1 — Takes 3 Minutes</div>
+  <h1>Tell Me About<br><span class="grad-y">Your Business</span></h1>
+  <p class="hero-sub">Fill this out and I'll reach out within 24 hours to confirm your spot and get started.</p>
+</section>
+
+<div class="divider"></div>
+
+<section class="form-section">
+  <div id="q-form">
+
+    <div class="step">
+      <div class="step-num" style="color:#f9a826">01 — Contact Info</div>
+      <div class="step-q">Who are we working with?</div>
+      <div class="field-row">
+        <div>
+          <label>First Name</label>
+          <input type="text" id="fname" placeholder="John" />
+        </div>
+        <div>
+          <label>Last Name</label>
+          <input type="text" id="lname" placeholder="Smith" />
+        </div>
+      </div>
+      <label>Email Address</label>
+      <input type="email" id="email" placeholder="you@example.com" />
+      <label>Phone Number</label>
+      <input type="tel" id="phone" placeholder="(813) 555-0100" />
+      <label style="margin-top:0.5rem">How do you prefer to be contacted?</label>
+      <div class="radio-group" id="contact-pref-group">
+        <label class="radio-opt" onclick="selectRadio(this, 'contact-pref-group')">
+          <input type="radio" name="contact-pref" value="email" /> Email
+        </label>
+        <label class="radio-opt" onclick="selectRadio(this, 'contact-pref-group')">
+          <input type="radio" name="contact-pref" value="text" /> Text
+        </label>
+        <label class="radio-opt" onclick="selectRadio(this, 'contact-pref-group')">
+          <input type="radio" name="contact-pref" value="call" /> Phone Call
+        </label>
+        <label class="radio-opt" onclick="selectRadio(this, 'contact-pref-group')">
+          <input type="radio" name="contact-pref" value="any" /> Any of the above
+        </label>
+      </div>
+    </div>
+
+    <div class="step">
+      <div class="step-num" style="color:#e040fb">02 — Your Business</div>
+      <div class="step-q">What is your business called and what do you do?</div>
+      <label>Business Name</label>
+      <input type="text" id="biz-name" placeholder="e.g. Smith's Lawn Care" />
+      <label>Type of Business / Services You Offer</label>
+      <textarea id="biz-type" placeholder="e.g. Residential lawn mowing, edging, and cleanup in the Brandon area"></textarea>
+    </div>
+
+    <div class="step">
+      <div class="step-num" style="color:#00e5ff">03 — Online Presence</div>
+      <div class="step-q">Where are you at right now?</div>
+      <div class="radio-group" id="presence-group">
+        <label class="radio-opt" onclick="selectRadio(this, 'presence-group')">
+          <input type="radio" name="presence" value="none" /> No website or social media presence
+        </label>
+        <label class="radio-opt" onclick="selectRadio(this, 'presence-group')">
+          <input type="radio" name="presence" value="facebook" /> Facebook page only
+        </label>
+        <label class="radio-opt" onclick="selectRadio(this, 'presence-group')">
+          <input type="radio" name="presence" value="both" /> Facebook + other social media, no website
+        </label>
+      </div>
+      <label style="margin-top:1.25rem">Social Media Accounts (paste any links or handles you have)</label>
+      <textarea id="social" placeholder="e.g. facebook.com/smithslawncare, @smithslawn on Instagram"></textarea>
+    </div>
+
+    <div class="step">
+      <div class="step-num" style="color:#00e676">04 — Your Goals</div>
+      <div class="step-q">What do you most want your website to do for you?</div>
+      <div class="radio-group" id="goal-group">
+        <label class="radio-opt" onclick="selectRadio(this, 'goal-group')">
+          <input type="radio" name="goal" value="leads" /> Get more leads and inquiries
+        </label>
+        <label class="radio-opt" onclick="selectRadio(this, 'goal-group')">
+          <input type="radio" name="goal" value="bookings" /> Increase bookings
+        </label>
+        <label class="radio-opt" onclick="selectRadio(this, 'goal-group')">
+          <input type="radio" name="goal" value="credibility" /> Look more professional and credible
+        </label>
+        <label class="radio-opt" onclick="selectRadio(this, 'goal-group')">
+          <input type="radio" name="goal" value="all" /> All of the above
+        </label>
+      </div>
+    </div>
+
+    <div class="step">
+      <div class="step-num" style="color:#f9a826">05 — Service Area</div>
+      <div class="step-q">What city or area do you serve?</div>
+      <input type="text" id="service-area" placeholder="e.g. Brandon, FL and surrounding areas" />
+    </div>
+
+    <div class="step">
+      <div class="step-num" style="color:#e040fb">06 — Vibe &amp; Style</div>
+      <div class="step-q">Pick the words that best describe your brand.</div>
+      <div class="radio-group" id="vibe-group">
+        <label class="radio-opt" onclick="selectRadio(this, 'vibe-group')">
+          <input type="radio" name="vibe" value="professional" /> Clean. Professional.
+        </label>
+        <label class="radio-opt" onclick="selectRadio(this, 'vibe-group')">
+          <input type="radio" name="vibe" value="bold" /> Bold. Energetic.
+        </label>
+        <label class="radio-opt" onclick="selectRadio(this, 'vibe-group')">
+          <input type="radio" name="vibe" value="friendly" /> Friendly. Local.
+        </label>
+        <label class="radio-opt" onclick="selectRadio(this, 'vibe-group')">
+          <input type="radio" name="vibe" value="rugged" /> Rugged. Hardworking.
+        </label>
+        <label class="radio-opt" onclick="selectRadio(this, 'vibe-group')">
+          <input type="radio" name="vibe" value="minimal" /> Simple. Minimal.
+        </label>
+      </div>
+      <label style="margin-top:1.25rem">Any websites you like the look of? (paste links if you have them)</label>
+      <textarea id="inspo" placeholder="e.g. I like how abc.com looks, or I want something similar to xyz.com..."></textarea>
+    </div>
+
+    <div class="step">
+      <div class="step-num" style="color:#00e5ff">07 — Colors &amp; Branding</div>
+      <div class="step-q">Do you have a logo or existing color scheme?</div>
+      <div class="radio-group" id="logo-group">
+        <label class="radio-opt" onclick="selectRadio(this, 'logo-group')">
+          <input type="radio" name="logo" value="yes-both" /> Yes — I have a logo and brand colors
+        </label>
+        <label class="radio-opt" onclick="selectRadio(this, 'logo-group')">
+          <input type="radio" name="logo" value="yes-logo" /> I have a logo but no defined colors
+        </label>
+        <label class="radio-opt" onclick="selectRadio(this, 'logo-group')">
+          <input type="radio" name="logo" value="colors-only" /> I have colors in mind but no logo
+        </label>
+        <label class="radio-opt" onclick="selectRadio(this, 'logo-group')">
+          <input type="radio" name="logo" value="none" /> Starting from scratch — no logo or colors yet
+        </label>
+      </div>
+      <label style="margin-top:1.25rem">Describe your preferred colors or paste any hex/brand codes if you have them</label>
+      <input type="text" id="colors" placeholder="e.g. Dark green and white, or #2d6a2d and #ffffff" />
+    </div>
+
+    <div class="step">
+      <div class="step-num" style="color:#00e676">08 — Anything Else</div>
+      <div class="step-q">Anything you want me to know before we get started?</div>
+      <textarea id="notes" placeholder="Specific features, questions, things that are important to you..."></textarea>
+    </div>
+
+    <div class="submit-wrap">
+      <button class="btn-submit" onclick="submitForm()">Submit — Reserve My Spot</button>
+      <p style="font-size:0.75rem;color:#555;margin-top:1rem">I'll follow up within 24 hours. No spam. No nonsense.</p>
+    </div>
+
+  </div>
+
+  <div class="success-box" id="success-box">
+    <h3>You're Reserved!</h3>
+    <p>Thanks for filling that out. I'll review your answers and reach out within 24 hours to confirm your spot and kick things off.</p>
+  </div>
+
+</section>
+
+<footer>
+  <p>2026 Portfolio Series</p>
+</footer>
+
+<script>
+  function selectRadio(el, groupId) {
+    document.querySelectorAll('#' + groupId + ' .radio-opt').forEach(o => o.classList.remove('selected'));
+    el.classList.add('selected');
+  }
+
+  function submitForm() {
+    const required = ['fname', 'lname', 'email', 'biz-name', 'biz-type', 'service-area'];
+    for (let id of required) {
+      if (!document.getElementById(id).value.trim()) {
+        alert('Please fill in all required fields before submitting.');
+        document.getElementById(id).focus();
+        return;
+      }
+    }
+    document.getElementById('q-form').style.display = 'none';
+    document.getElementById('success-box').style.display = 'block';
+    window.scrollTo({ top: 0, behavior: 'smooth' });
+  }
+</script>
+
+</body>
+</html>
